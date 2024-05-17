@@ -1,8 +1,10 @@
-import { Box, Tab } from '@mui/material';
+import { Box, Paper, Tab, Link as MUILink } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { TabPanel, TabList, TabContext } from '@mui/lab';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useState } from 'react';
 import * as StringMask from 'string-mask';
+import { NavigateNext } from '@mui/icons-material';
 const step2 = () => {
   const [value, setValue] = useState('1');
 
@@ -10,14 +12,26 @@ const step2 = () => {
     setValue(newValue);
   };
 
-  var mask = new StringMask.default('#', ); //optionsObject is optional
+  var mask = new StringMask.default('#'); //optionsObject is optional
 
   const columns: GridColDef[] = [
-    { field: 'category', headerName: 'Categoria' },
+    {
+      field: 'categoryId',
+      headerName: 'Categoria',
+      type: 'singleSelect',
+      editable: true,
+      valueOptions: [
+        { value: 0, label: 'Shopping' },
+        { value: 2, label: 'Subscripciones' },
+      ],
+    },
     {
       field: 'description',
       headerName: 'Descripción',
+      editable: true,
       sortable: true,
+      resizable: true,
+      width: 650,
     },
     {
       field: 'date',
@@ -37,7 +51,6 @@ const step2 = () => {
       field: 'action',
       headerName: 'Acciones',
       sortable: false,
-      width: 30,
     },
   ];
 
@@ -357,26 +370,50 @@ const step2 = () => {
   ];
 
   return (
-    <TabContext value={value}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          width: '100%',
-        }}
-      >
-        <TabList onChange={handleChange} centered>
-          <Tab value="1" label="Sin categorizar" />
-          <Tab value="2" label="Categorizado" />
-        </TabList>
+    <Paper
+      elevation={2}
+      square={false}
+      sx={{
+        padding: '10px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+      }}
+    >
+      <TabContext value={value}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%',
+          }}
+        >
+          <TabList onChange={handleChange} centered>
+            <Tab value="1" label="Sin categorizar" />
+            <Tab value="2" label="Categorizado" />
+          </TabList>
 
-        <TabPanel value="1">
-          <DataGrid rows={data} columns={columns} checkboxSelection />
-        </TabPanel>
-        <TabPanel value="2">Item Two</TabPanel>
-      </Box>
-    </TabContext>
+          <TabPanel value="1" sx={{ width: '100%' }}>
+            <DataGrid rows={data} columns={columns} checkboxSelection />
+          </TabPanel>
+          <TabPanel value="2">Item Two</TabPanel>
+        </Box>
+      </TabContext>
+
+      <Link to="/process/step3" style={{ textDecoration: 'none' }}>
+        <MUILink
+          sx={{
+            color: 'white',
+            textDecoration: 'none',
+            display: 'flex',
+            alignItems: 'right',
+          }}
+        >
+          Continuar <NavigateNext />
+        </MUILink>
+      </Link>
+    </Paper>
   );
 };
 
