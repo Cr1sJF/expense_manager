@@ -1,10 +1,9 @@
-import { Box, Paper, Stack, Tab } from '@mui/material';
-
+import { Box, Paper, Tab, Button, Stack } from '@mui/material';
 import { TabPanel, TabList, TabContext } from '@mui/lab';
 import { useState } from 'react';
 import RecordsTable from '../../components/recordsTable/RecordsTable';
 import Link from '../../components/ui/Link';
-const Step2 = () => {
+const Step3 = () => {
   const [value, setValue] = useState('1');
 
   const handleChange = (_: React.SyntheticEvent, newValue: string) => {
@@ -299,8 +298,8 @@ const Step2 = () => {
           }}
         >
           <TabList onChange={handleChange} centered>
-            <Tab value="1" label="Sin categorizar" />
-            <Tab value="2" label="Categorizado" />
+            <Tab value="1" label="Resumen" />
+            <Tab value="2" label="Gastos por grupo" />
           </TabList>
 
           <TabPanel value="1" sx={{ width: '100%', height: '500px' }}>
@@ -316,18 +315,31 @@ const Step2 = () => {
       </TabContext>
 
       <Stack
+        direction="row"
+        spacing={2}
         sx={{
-          width: '100%',
+          marginTop: '10px',
           display: 'flex',
-          flexDirection: 'row',
           justifyContent: 'space-between',
+          width: '100%',
         }}
       >
-        <Link to="/process/step1" text="Anterior" isPrev />
-        <Link to="/process/step3" text="Siguiente" isNext />
+        <Box>
+          <Link to="/process/step2" text="Atras" isPrev={true} />
+        </Box>
+
+        <Box>
+          <Button variant="outlined" sx={{ marginRight: '15px' }}>
+            Asignar gastos a Splitwise
+          </Button>
+          <Button variant="contained">Descargar CSV</Button>
+        </Box>
+        {/* <Button variant="outlined" color="error">
+          Error
+        </Button> */}
       </Stack>
     </Paper>
   );
 };
 
-export default Step2;
+export default Step3;

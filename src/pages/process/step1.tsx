@@ -1,4 +1,3 @@
-import { NavigateNext } from '@mui/icons-material';
 import {
   Box,
   Paper,
@@ -7,9 +6,8 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Link as MUILink,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import Link from '../../components/ui/Link';
 
 const Step1 = () => {
   const processors = ['FALABELLA', 'SANTANDER', 'TENPO'];
@@ -17,7 +15,12 @@ const Step1 = () => {
 
   return (
     <Box
-      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '100%',
+      }}
     >
       <form noValidate autoComplete="off" style={{ width: '70%' }}>
         <Paper
@@ -60,18 +63,7 @@ const Step1 = () => {
               alignItems: 'flex-end',
             }}
           >
-            <Link to="/process/step2" style={{ textDecoration: 'none' }}>
-              <MUILink
-                sx={{
-                  color: 'white',
-                  textDecoration: 'none',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                Continuar <NavigateNext />
-              </MUILink>
-            </Link>
+            <Link to="/process/step2" text="Continuar" isNext />
             {/* <Button variant="contained" endIcon={<NavigateNext />} >
               Continuar
             </Button> */}

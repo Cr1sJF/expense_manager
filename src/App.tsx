@@ -9,6 +9,7 @@ import { Box, Container, Typography } from '@mui/material';
 import { UserContextProvider } from './context/userContext';
 import Step1 from './pages/process/step1';
 import Step2 from './pages/process/step2';
+import Step3 from './pages/process/step3';
 
 const darkTheme = createTheme({
   palette: {
@@ -48,7 +49,7 @@ function App() {
               >
                 <Route path="step1" element={<Step1></Step1>} />
                 <Route path="step2" element={<Step2></Step2>} />
-                <Route path="step3" element={<div>Step 3</div>} />
+                <Route path="step3" element={<Step3></Step3>} />
               </Route>
 
               <Route path="/splitwise" element={<div>Splitwise</div>} />

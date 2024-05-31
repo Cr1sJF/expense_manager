@@ -26,7 +26,21 @@ import { AccountCircle } from '@mui/icons-material';
 // };
 
 const Header = () => {
-  const pages = ['Process', 'Bills', 'SplitWise'];
+  // const pages = ['Process', 'Bills', 'SplitWise'];
+  const pages = [
+    {
+      name: 'Process',
+      url: '/process/step1',
+    },
+    {
+      name: 'Bills',
+      url: '/bills',
+    },
+    {
+      name: 'SplitWise',
+      url: '/splitwise',
+    },
+  ];
   const settings = ['Lists', 'Categories', 'Rules'];
 
   const { loggedIn, login } = useContext(UserContext);
@@ -56,8 +70,8 @@ const Header = () => {
           {loggedIn && (
             <>
               {pages.map((page) => (
-                <Link key={page} href={`/${page.toLowerCase()}`}>
-                  {page}
+                <Link key={page.name} href={`${page.url.toLowerCase()}`}>
+                  {page.name}
                 </Link>
               ))}
 
