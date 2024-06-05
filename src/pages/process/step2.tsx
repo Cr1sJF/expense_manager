@@ -4,6 +4,7 @@ import { TabPanel, TabList, TabContext } from '@mui/lab';
 import { useState } from 'react';
 import RecordsTable from '../../components/recordsTable/RecordsTable';
 import Link from '../../components/ui/Link';
+import CustomStepper from '../../components/stepper/Stepper';
 const Step2 = () => {
   const [value, setValue] = useState('1');
 
@@ -279,54 +280,60 @@ const Step2 = () => {
   ];
 
   return (
-    <Paper
-      elevation={2}
-      square={false}
-      sx={{
-        padding: '10px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-      }}
-    >
-      <TabContext value={value}>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: '100%',
-          }}
-        >
-          <TabList onChange={handleChange} centered>
-            <Tab value="1" label="Sin categorizar" />
-            <Tab value="2" label="Categorizado" />
-          </TabList>
-
-          <TabPanel value="1" sx={{ width: '100%', height: '500px' }}>
-            <RecordsTable
-              data={data}
-              readonly={false}
-              showActions={true}
-              showDivisible={false}
-            />
-          </TabPanel>
-          <TabPanel value="2">Item Two</TabPanel>
-        </Box>
-      </TabContext>
-
-      <Stack
+    <>
+      <CustomStepper
+        activeStep={1}
+        steps={['Subir archivo', 'Categorizar gastos', 'Asignar gastos']}
+      />
+      <Paper
+        elevation={2}
+        square={false}
         sx={{
-          width: '100%',
+          padding: '10px',
           display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
+          flexDirection: 'column',
+          alignItems: 'flex-end',
         }}
       >
-        <Link to="/process/step1" text="Anterior" isPrev />
-        <Link to="/process/step3" text="Siguiente" isNext />
-      </Stack>
-    </Paper>
+        <TabContext value={value}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: '100%',
+            }}
+          >
+            <TabList onChange={handleChange} centered>
+              <Tab value="1" label="Sin categorizar" />
+              <Tab value="2" label="Categorizado" />
+            </TabList>
+
+            <TabPanel value="1" sx={{ width: '100%', height: '500px' }}>
+              <RecordsTable
+                data={data}
+                readonly={false}
+                showActions={true}
+                showDivisible={false}
+              />
+            </TabPanel>
+            <TabPanel value="2">Item Two</TabPanel>
+          </Box>
+        </TabContext>
+
+        <Stack
+          sx={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Link to="/process/step1" text="Anterior" isPrev />
+          <Link to="/process/step3" text="Siguiente" isNext />
+        </Stack>
+      </Paper>
+    </>
   );
 };
 

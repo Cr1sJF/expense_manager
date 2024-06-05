@@ -3,6 +3,7 @@ import { TabPanel, TabList, TabContext } from '@mui/lab';
 import { useState } from 'react';
 import RecordsTable from '../../components/recordsTable/RecordsTable';
 import Link from '../../components/ui/Link';
+import CustomStepper from '../../components/stepper/Stepper';
 const Step3 = () => {
   const [value, setValue] = useState('1');
 
@@ -278,67 +279,73 @@ const Step3 = () => {
   ];
 
   return (
-    <Paper
-      elevation={2}
-      square={false}
-      sx={{
-        padding: '10px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-      }}
-    >
-      <TabContext value={value}>
-        <Box
+    <>
+      <CustomStepper
+        activeStep={2}
+        steps={['Subir archivo', 'Categorizar gastos', 'Asignar gastos']}
+      />
+      <Paper
+        elevation={2}
+        square={false}
+        sx={{
+          padding: '10px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-end',
+        }}
+      >
+        <TabContext value={value}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: '100%',
+            }}
+          >
+            <TabList onChange={handleChange} centered>
+              <Tab value="1" label="Resumen" />
+              <Tab value="2" label="Gastos por grupo" />
+            </TabList>
+
+            <TabPanel value="1" sx={{ width: '100%', height: '500px' }}>
+              <RecordsTable
+                data={data}
+                readonly={false}
+                showActions={true}
+                showDivisible={false}
+              />
+            </TabPanel>
+            <TabPanel value="2">Item Two</TabPanel>
+          </Box>
+        </TabContext>
+
+        <Stack
+          direction="row"
+          spacing={2}
           sx={{
+            marginTop: '10px',
             display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            justifyContent: 'space-between',
             width: '100%',
           }}
         >
-          <TabList onChange={handleChange} centered>
-            <Tab value="1" label="Resumen" />
-            <Tab value="2" label="Gastos por grupo" />
-          </TabList>
+          <Box>
+            <Link to="/process/step2" text="Atras" isPrev={true} />
+          </Box>
 
-          <TabPanel value="1" sx={{ width: '100%', height: '500px' }}>
-            <RecordsTable
-              data={data}
-              readonly={false}
-              showActions={true}
-              showDivisible={false}
-            />
-          </TabPanel>
-          <TabPanel value="2">Item Two</TabPanel>
-        </Box>
-      </TabContext>
-
-      <Stack
-        direction="row"
-        spacing={2}
-        sx={{
-          marginTop: '10px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          width: '100%',
-        }}
-      >
-        <Box>
-          <Link to="/process/step2" text="Atras" isPrev={true} />
-        </Box>
-
-        <Box>
-          <Button variant="outlined" sx={{ marginRight: '15px' }}>
-            Asignar gastos a Splitwise
-          </Button>
-          <Button variant="contained">Descargar CSV</Button>
-        </Box>
-        {/* <Button variant="outlined" color="error">
+          <Box>
+            <Button variant="outlined" sx={{ marginRight: '15px' }}>
+              Asignar gastos a Splitwise
+            </Button>
+            <Button variant="contained">Descargar CSV</Button>
+          </Box>
+          {/* <Button variant="outlined" color="error">
           Error
         </Button> */}
-      </Stack>
-    </Paper>
+        </Stack>
+      </Paper>
+    </>
   );
 };
 

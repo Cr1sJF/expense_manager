@@ -40,9 +40,9 @@ function App() {
                       alignItems: 'center',
                     }}
                   >
-                    <Typography variant="h3" sx={{ m: 1 }}>
+                    {/* <Typography variant="h3" sx={{ m: 1 }}>
                       Procesar gastos
-                    </Typography>
+                    </Typography> */}
                     <Outlet />
                   </Box>
                 }
