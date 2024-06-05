@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import './styles.scss';
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import Home from './pages/home';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { UserContextProvider } from './context/userContext';
 import Step1 from './pages/process/step1';
 import Step2 from './pages/process/step2';
