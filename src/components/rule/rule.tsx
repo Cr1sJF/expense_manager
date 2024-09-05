@@ -14,58 +14,62 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Condition from './condition';
+// import Condition from './condition';
+import ConditionGroup from './conditionGroup';
 
 const Rule = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [categories, setCategories] = useState<any[]>([]);
-  const [conditions, _] = useState<any[]>([
-    {
-      field: '',
-      operator: '',
-      value: '',
-    },
-    {
-      field: '',
-      operator: '',
-      value: '',
-    },
-    {
-      field: '',
-      operator: '',
-      value: '',
-    },
-    {
-      field: '',
-      operator: '',
-      value: '',
-    },
-    {
-      field: '',
-      operator: '',
-      value: '',
-    },
-    {
-      field: '',
-      operator: '',
-      value: '',
-    },
-    {
-      field: '',
-      operator: '',
-      value: '',
-    },
-    {
-      field: '',
-      operator: '',
-      value: '',
-    },
-    {
-      field: '',
-      operator: '',
-      value: '',
-    },
-  ]);
+  // const [conditions, _] = useState<any[]>([
+  //   {
+  //     field: '',
+  //     operator: '',
+  //     value: '',
+  //   },
+  //   {
+  //     field: '',
+  //     operator: '',
+  //     value: '',
+  //   },
+  //   {
+  //     field: '',
+  //     operator: '',
+  //     value: '',
+  //   },
+  //   {
+  //     field: '',
+  //     operator: '',
+  //     value: '',
+  //   },
+  //   {
+  //     field: '',
+  //     operator: '',
+  //     value: '',
+  //   },
+  //   {
+  //     field: '',
+  //     operator: '',
+  //     value: '',
+  //   },
+  //   {
+  //     field: '',
+  //     operator: '',
+  //     value: '',
+  //   },
+  //   {
+  //     field: '',
+  //     operator: '',
+  //     value: '',
+  //   },
+  //   {
+  //     field: '',
+  //     operator: '',
+  //     value: '',
+  //   },
+  // ]);
+
+  const conditionsGroups = [{}];
+
   useEffect(() => {
     try {
       const loadCategories = async () => {
@@ -154,7 +158,11 @@ const Rule = () => {
             my: 2,
           }}
         >
-          {conditions.map((condition, index) => (
+          {conditionsGroups.map((_, index) => (
+            <ConditionGroup key={'condGroup-' + index} />
+          ))}
+
+          {/* {conditions.map((condition, index) => (
             <Condition
               key={'cond' + -index}
               field={condition.field}
@@ -162,7 +170,7 @@ const Rule = () => {
               value={condition.value}
               isLast={index === conditions.length - 1}
             />
-          ))}
+          ))} */}
         </Box>
 
         <Box sx={{ mt: 4, display: 'flex', justifyContent: 'space-between' }}>

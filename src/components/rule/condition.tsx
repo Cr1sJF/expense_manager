@@ -13,6 +13,7 @@ export type CoditionProps = {
   field: string;
   op: string;
   value: string;
+  isFirst?: boolean;
   isLast?: boolean;
 };
 const Condition = (props: CoditionProps) => {
@@ -52,11 +53,19 @@ const Condition = (props: CoditionProps) => {
           ))}
         </Select>
       </FormControl>
-      <TextField id="value" label="Valor" variant="standard" sx={{ m: 1 }} />
+      <TextField
+        id="value"
+        label="Valor"
+        variant="standard"
+        sx={{ m: 1 }}
+        value={props.value}
+      />
 
-      <IconButton>
-        <Remove />
-      </IconButton>
+      {!props.isFirst && (
+        <IconButton>
+          <Remove />
+        </IconButton>
+      )}
 
       {props.isLast && (
         <IconButton>
