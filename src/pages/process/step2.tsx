@@ -310,7 +310,7 @@ const Step2 = () => {
               <RecordsTable
                 data={data}
                 readonly={false}
-                showActions={true}
+                showActions={['DELETE', 'CREATE_RULE']}
                 showDivisible={false}
               />
             </TabPanel>

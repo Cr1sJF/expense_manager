@@ -1,4 +1,4 @@
-import { Delete } from '@mui/icons-material';
+import { Check, Delete } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import {
   GridRowId,
@@ -11,6 +11,7 @@ export type ToolbarProps = {
   selectedRows: Map<GridRowId, GridValidRowModel>;
   setRows: React.Dispatch<React.SetStateAction<any[]>>;
   rows: any[];
+  toggleDivisible?: boolean;
 };
 
 const CustomToolbar = (props: ToolbarProps) => {
@@ -34,6 +35,27 @@ const CustomToolbar = (props: ToolbarProps) => {
       >
         <Delete /> Eliminar seleccionados
       </Button>
+
+      {props.toggleDivisible && (
+        <Button
+          disabled={!props.selectedRows.size}
+          onClick={() => {
+            // const newRows = props.rows.filter(
+            //   (row: any) => !props.selectedRows.has(row.id)
+            // );
+            // props.setRows(newRows);
+
+            props.selectedRows.forEach((row) => {
+              row.divisible = !row.divisible;
+            });
+
+            props.setRows([...props.rows]);
+          }}
+        >
+          <Check /> Cambiar divisible
+        </Button>
+      )}
+
       {/* <Box sx={{ flexGrow: 1 }} />
         <GridToolbarExport
           slotProps={{

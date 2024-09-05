@@ -309,8 +309,8 @@ const Step3 = () => {
               <RecordsTable
                 data={data}
                 readonly={false}
-                showActions={true}
-                showDivisible={false}
+                showActions={['DELETE', 'SPLITWISE']}
+                showDivisible={true}
               />
             </TabPanel>
             <TabPanel value="2">Item Two</TabPanel>

@@ -11,7 +11,7 @@ import {
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button, Modal } from '@mui/material';
-import { Delete, Rule as RuleIcon } from '@mui/icons-material';
+import { Delete, Rule as RuleIcon, Wallet } from '@mui/icons-material';
 import CustomToolbar from './Toolbar';
 import Rule from '../rule/rule';
 
@@ -30,10 +30,12 @@ const style = {
   p: 4,
 };
 
+type AllowedActions = 'DELETE' | 'CREATE_RULE' | 'SPLITWISE';
+
 export type RecordsTable = {
   data: any;
   readonly: boolean;
-  showActions: boolean;
+  showActions: boolean | AllowedActions[];
   showDivisible: boolean;
 };
 
@@ -96,15 +98,30 @@ const RecordsTable = (props: RecordsTable) => {
       field: 'amount',
       headerName: 'Monto',
       sortable: false,
+      filterable: false,
       valueFormatter: (value) => currencyFormatter.format(value),
     },
-    {
+  ];
+
+  if (props.showDivisible) {
+    columns.push({
+      field: 'divisible',
+      headerName: 'Divisible',
+      type: 'boolean',
+      sortable: false,
+      editable: true,
+    });
+  }
+
+  if (props.showActions) {
+    columns.push({
       field: 'action',
       headerName: 'Acciones',
       width: 200,
       align: 'center',
       headerAlign: 'center',
       sortable: false,
+      filterable: false,
       renderCell: (params: GridRenderCellParams<any, any>) => {
         const apiRef = useGridApiContext();
         const deleteRow = (e: any) => {
@@ -120,19 +137,43 @@ const RecordsTable = (props: RecordsTable) => {
           setOpen(true);
         };
 
+        let actions: AllowedActions[] = [];
+        if (props.showActions === true) {
+          actions.push('DELETE');
+          actions.push('CREATE_RULE');
+          actions.push('SPLITWISE');
+        } else if (Array.isArray(props.showActions)) {
+          actions = props.showActions;
+        }
+
         return (
           <>
-            <Button onClick={deleteRow} title="Eliminar registro">
+            {actions.includes('DELETE') && (
+              <Button onClick={deleteRow} title="Eliminar registro">
+                {' '}
+                <Delete sx={{ color: '#e74c3c' }} />{' '}
+              </Button>
+            )}
+            {/* <Button onClick={deleteRow} title="Eliminar registro">
               <Delete />
-            </Button>
-            <Button onClick={createRule} title="Crear regla">
-              <RuleIcon />
-            </Button>
+            </Button> */}
+
+            {actions.includes('CREATE_RULE') && (
+              <Button onClick={createRule} title="Crear regla">
+                <RuleIcon />
+              </Button>
+            )}
+
+            {actions.includes('SPLITWISE') && (
+              <Button onClick={() => {}} title="Asignar a Splitwise">
+                <Wallet />
+              </Button>
+            )}
           </>
         );
       },
-    },
-  ];
+    });
+  }
 
   return (
     <>
@@ -148,7 +189,13 @@ const RecordsTable = (props: RecordsTable) => {
           setSelectedRows(details.api.getSelectedRows());
         }}
         slots={{
-          toolbar: () => CustomToolbar({ rows, setRows, selectedRows }),
+          toolbar: () =>
+            CustomToolbar({
+              rows,
+              setRows,
+              selectedRows,
+              toggleDivisible: props.showDivisible,
+            }),
         }}
       />
       {/* 
@@ -182,7 +229,9 @@ const RecordsTable = (props: RecordsTable) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography variant='h6' sx={{ mb: 2 }}>Nueva regla</Typography>
+          <Typography variant="h6" sx={{ mb: 2 }}>
+            Nueva regla
+          </Typography>
           <Rule />
         </Box>
       </Modal>
