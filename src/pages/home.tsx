@@ -1,11 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import Login from '../components/login/login';
-import { useContext } from 'react';
-import { UserContext } from '../context/userContext';
 import ActionCard from '../components/ui/ActionCard';
+import { useAuthContext } from '../providers/UserContextProvider';
 
 const Home = () => {
-  const { loggedIn } = useContext(UserContext);
+  const { auth } = useAuthContext();
 
   const actions = [
     {
@@ -32,9 +31,9 @@ const Home = () => {
       <Typography variant="h2" sx={{ m: 1 }}>
         Expense Manager
       </Typography>
-      {!loggedIn && <Login />}
+      {!auth.token && <Login />}
 
-      {loggedIn && (
+      {auth.token && (
         <Box style={{ display: 'flex', flexDirection: 'row' }}>
           {actions.map((action) => (
             <ActionCard key={action.name} {...action}></ActionCard>

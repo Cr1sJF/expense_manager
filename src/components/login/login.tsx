@@ -1,10 +1,10 @@
 import { AccountCircle } from '@mui/icons-material';
 import { Paper, Avatar, TextField, Button } from '@mui/material';
-import { useContext } from 'react';
-import { UserContext } from '../../context/userContext';
+import { useAuthContext } from '../../providers/UserContextProvider';
 
 function Login(_: any) {
-  const { login } = useContext(UserContext);
+  const { login } = useAuthContext();
+
   return (
     <Paper
       elevation={1}

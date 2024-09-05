@@ -6,10 +6,10 @@ import './styles.scss';
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import Home from './pages/home';
 import { Box, Container } from '@mui/material';
-import { UserContextProvider } from './context/userContext';
 import Step1 from './pages/process/step1';
 import Step2 from './pages/process/step2';
 import Step3 from './pages/process/step3';
+import { AuthProvider } from './providers/UserContextProvider';
 
 const darkTheme = createTheme({
   palette: {
@@ -23,7 +23,7 @@ function App() {
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
 
-        <UserContextProvider>
+        <AuthProvider>
           <Header></Header>
 
           <Container>
@@ -71,7 +71,7 @@ function App() {
               <Route path="*" element={<div>404 NOT FOUND</div>} />
             </Routes>
           </Container>
-        </UserContextProvider>
+        </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>
   );

@@ -1,5 +1,5 @@
 import { Link as ReactLink } from 'react-router-dom';
-import { Link as MUILink } from '@mui/material';
+// import { Link as MUILink } from '@mui/material';
 import { NavigateBefore, NavigateNext } from '@mui/icons-material';
 
 type LinkProps = {
@@ -10,8 +10,21 @@ type LinkProps = {
 };
 const Link = ({ to, text, isNext, isPrev }: LinkProps) => {
   return (
-    <ReactLink to={to} style={{ textDecoration: 'none' }}>
-      <MUILink
+    <ReactLink
+      to={to}
+      style={{
+        textDecoration: 'none',
+        color: 'white',
+        display: 'flex',
+        alignItems: 'right',
+      }}
+      // sx={{
+
+      // }}
+    >
+      {isPrev && <NavigateBefore />} {text} {isNext && <NavigateNext />}
+      {/* <MUILink
+        
         sx={{
           color: 'white',
           textDecoration: 'none',
@@ -19,8 +32,8 @@ const Link = ({ to, text, isNext, isPrev }: LinkProps) => {
           alignItems: 'right',
         }}
       >
-        {isPrev && <NavigateBefore />} {text} {isNext && <NavigateNext />}
-      </MUILink>
+        
+      </MUILink> */}
     </ReactLink>
   );
 };

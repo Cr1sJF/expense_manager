@@ -12,10 +12,10 @@ import {
 // import MenuIcon from '@mui/icons-material/Menu';
 import SettingsIcon from '@mui/icons-material/Settings';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import React, { useContext } from 'react';
+import React from 'react';
 import './header.scss';
-import { UserContext } from '../../context/userContext';
 import { AccountCircle } from '@mui/icons-material';
+import { useAuthContext } from '../../providers/UserContextProvider';
 
 // const onlyMobile = {
 //   display: { xs: 'block', md: 'none' },
@@ -43,7 +43,7 @@ const Header = () => {
   ];
   const settings = ['Lists', 'Categories', 'Rules'];
 
-  const { loggedIn, login } = useContext(UserContext);
+  const { login, auth } = useAuthContext();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -67,7 +67,7 @@ const Header = () => {
             <Link href="/">Expense Manager</Link>
           </Typography>
 
-          {loggedIn && (
+          {auth.token && (
             <>
               {pages.map((page) => (
                 <Link key={page.name} href={`${page.url.toLowerCase()}`}>
@@ -115,7 +115,7 @@ const Header = () => {
             </>
           )}
 
-          {!loggedIn && (
+          {!auth.token && (
             <>
               <Box
                 sx={{

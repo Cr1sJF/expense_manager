@@ -1,7 +1,7 @@
 import {
   Box,
   Paper,
-  Button,
+  // Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -9,10 +9,11 @@ import {
 } from '@mui/material';
 import Link from '../../components/ui/Link';
 import CustomStepper from '../../components/stepper/Stepper';
+import FilePicker from '../../components/ui/FilePicker';
 
 const Step1 = () => {
   const processors = ['FALABELLA', 'SANTANDER', 'TENPO'];
-  const selectedProcessor = null;
+  const selectedProcessor = 'FALABELLA';
 
   return (
     <>
@@ -40,10 +41,12 @@ const Step1 = () => {
             }}
           >
             <FormControl sx={{ mt: 5, width: '70%' }}>
-              <Button variant="outlined" component="label">
+              {/* <Button variant="outlined" component="label">
                 Seleccione archivo
                 <input type="file" hidden />
-              </Button>
+              </Button> */}
+
+              <FilePicker />
             </FormControl>
 
             <FormControl sx={{ mt: 5, width: '70%' }}>
@@ -52,11 +55,14 @@ const Step1 = () => {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={selectedProcessor}
-                label="Age"
-                onChange={() => {}}
+                label="Procesador"
+                // onChange={() => {}}
               >
-                {processors.map((processor) => (
-                  <MenuItem value={processor}>{processor}</MenuItem>
+                <MenuItem value="">-SELECCIONE-</MenuItem>
+                {processors.map((processor, index) => (
+                  <MenuItem key={index} value={processor}>
+                    {processor}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>

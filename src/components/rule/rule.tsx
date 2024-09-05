@@ -40,6 +40,31 @@ const Rule = () => {
       operator: '',
       value: '',
     },
+    {
+      field: '',
+      operator: '',
+      value: '',
+    },
+    {
+      field: '',
+      operator: '',
+      value: '',
+    },
+    {
+      field: '',
+      operator: '',
+      value: '',
+    },
+    {
+      field: '',
+      operator: '',
+      value: '',
+    },
+    {
+      field: '',
+      operator: '',
+      value: '',
+    },
   ]);
   useEffect(() => {
     try {
@@ -65,7 +90,7 @@ const Rule = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'stretch',
-        maxWidth: '90vw', // Opcional: para limitar el ancho máximo del modal
+        // maxWidth: '90vw', // Opcional: para limitar el ancho máximo del modal
         maxHeight: '90vh', // Opcional: para limitar la altura máxima del modal
         overflowY: 'auto', // Permite desplazamiento si el contenido es muy alto
       }}
@@ -73,6 +98,7 @@ const Rule = () => {
       <Box>
         <Box
           sx={{
+            // width: '50%',
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
