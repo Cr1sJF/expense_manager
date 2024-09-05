@@ -8,7 +8,7 @@ import {
   Select,
 } from '@mui/material';
 import Link from '../../components/ui/Link';
-import CustomStepper from '../../components/stepper/Stepper';
+import { ProcessStepper } from '../../components/stepper/Stepper';
 import FilePicker from '../../components/ui/FilePicker';
 
 const Step1 = () => {
@@ -17,10 +17,7 @@ const Step1 = () => {
 
   return (
     <>
-      <CustomStepper
-        activeStep={0}
-        steps={['Subir archivo', 'Categorizar gastos', 'Asignar gastos']}
-      />
+      <ProcessStepper activeStep={0} />
       <Box
         sx={{
           display: 'flex',

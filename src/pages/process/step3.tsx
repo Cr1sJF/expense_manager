@@ -3,7 +3,7 @@ import { TabPanel, TabList, TabContext } from '@mui/lab';
 import { useState } from 'react';
 import RecordsTable from '../../components/recordsTable/RecordsTable';
 import Link from '../../components/ui/Link';
-import CustomStepper from '../../components/stepper/Stepper';
+import { ProcessStepper } from '../../components/stepper/Stepper';
 const Step3 = () => {
   const [value, setValue] = useState('1');
 
@@ -280,10 +280,7 @@ const Step3 = () => {
 
   return (
     <>
-      <CustomStepper
-        activeStep={2}
-        steps={['Subir archivo', 'Categorizar gastos', 'Asignar gastos']}
-      />
+      <ProcessStepper activeStep={2} />
       <Paper
         elevation={2}
         square={false}

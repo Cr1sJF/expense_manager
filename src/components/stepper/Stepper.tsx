@@ -1,11 +1,15 @@
 import { Box, Stepper, Step, StepLabel } from '@mui/material';
 
-type StepperProps = {
+type CustomStepperProps = {
   steps: string[];
   activeStep: number;
 };
 
-export default function CustomStepper(props: StepperProps) {
+type StepperProps = {
+  activeStep: number;
+};
+
+export default function CustomStepper(props: CustomStepperProps) {
   return (
     <Box sx={{ width: '100%', my: 5 }}>
       <Stepper activeStep={props.activeStep} alternativeLabel>
@@ -17,4 +21,11 @@ export default function CustomStepper(props: StepperProps) {
       </Stepper>
     </Box>
   );
+}
+
+export function ProcessStepper(props: StepperProps) {
+  return CustomStepper({
+    steps: ['Subir archivo', 'Categorizar gastos', 'Asignar gastos'],
+    activeStep: props.activeStep,
+  });
 }
