@@ -17,6 +17,7 @@ import Rule from '../rule/rule';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Splitwise from '../splitwise/splitwise';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -47,7 +48,8 @@ const RecordsTable = (props: RecordsTable) => {
 
   const [rows, setRows] = useState(props.data);
 
-  const [open, setOpen] = useState(false);
+  const [openRule, setOpenRule] = useState(false);
+  const [openSplitwise, setOpenSplitwise] = useState(false);
 
   const currencyFormatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -134,7 +136,14 @@ const RecordsTable = (props: RecordsTable) => {
 
           // return alert(`CREATE RULE \n ${JSON.stringify(params.row, null, 4)}`);
 
-          setOpen(true);
+          setOpenRule(true);
+        };
+        const asignSplitwise = (e: any) => {
+          e.stopPropagation(); // don't select this row after clicking
+
+          // return alert(`CREATE RULE \n ${JSON.stringify(params.row, null, 4)}`);
+
+          setOpenSplitwise(true);
         };
 
         let actions: AllowedActions[] = [];
@@ -150,8 +159,7 @@ const RecordsTable = (props: RecordsTable) => {
           <>
             {actions.includes('DELETE') && (
               <Button onClick={deleteRow} title="Eliminar registro">
-                {' '}
-                <Delete sx={{ color: '#e74c3c' }} />{' '}
+                <Delete color="error" />
               </Button>
             )}
             {/* <Button onClick={deleteRow} title="Eliminar registro">
@@ -165,7 +173,7 @@ const RecordsTable = (props: RecordsTable) => {
             )}
 
             {actions.includes('SPLITWISE') && (
-              <Button onClick={() => {}} title="Asignar a Splitwise">
+              <Button onClick={asignSplitwise} title="Asignar a Splitwise">
                 <Wallet />
               </Button>
             )}
@@ -216,11 +224,11 @@ const RecordsTable = (props: RecordsTable) => {
       </Modal> */}
 
       <Modal
-        open={open}
-        onClose={() => setOpen(false)}
+        open={openRule}
+        onClose={() => setOpenRule(false)}
         sx={{
           boxShadow: 24,
-          p: 4,
+          p: 1,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -233,6 +241,28 @@ const RecordsTable = (props: RecordsTable) => {
             Nueva regla
           </Typography>
           <Rule />
+        </Box>
+      </Modal>
+
+      
+      <Modal
+        open={openSplitwise}
+        onClose={() => setOpenSplitwise(false)}
+        sx={{
+          boxShadow: 24,
+          p: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography variant="h6" sx={{ mb: 1 }}>
+            Asignar a Splitwise
+          </Typography>
+          <Splitwise />
         </Box>
       </Modal>
     </>

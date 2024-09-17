@@ -5,15 +5,20 @@ import CssBaseline from '@mui/material/CssBaseline';
 import './styles.scss';
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import Home from './pages/home';
-import { Box, Container } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import Step1 from './pages/process/step1';
 import Step2 from './pages/process/step2';
 import Step3 from './pages/process/step3';
 import { AuthProvider } from './providers/UserContextProvider';
+import Splitwise from './components/splitwise/splitwise';
+import Bills from './pages/bills';
 
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
+    error: {
+      main: '#e74c3c',
+    },
   },
 });
 
@@ -52,8 +57,18 @@ function App() {
                 <Route path="step3" element={<Step3></Step3>} />
               </Route>
 
-              <Route path="/splitwise" element={<div>Splitwise</div>} />
-              <Route path="/bills" element={<div>Bills</div>} />
+              <Route
+                path="/splitwise"
+                element={
+                  <>
+                    <Typography variant="h2" textAlign={'center'}>
+                      Asignar gastos
+                    </Typography>
+                    <Splitwise></Splitwise>
+                  </>
+                }
+              />
+              <Route path="/bills" element={<Bills></Bills>} />
 
               <Route
                 path="/settings"

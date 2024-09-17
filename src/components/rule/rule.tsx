@@ -20,55 +20,8 @@ import ConditionGroup from './conditionGroup';
 const Rule = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [categories, setCategories] = useState<any[]>([]);
-  // const [conditions, _] = useState<any[]>([
-  //   {
-  //     field: '',
-  //     operator: '',
-  //     value: '',
-  //   },
-  //   {
-  //     field: '',
-  //     operator: '',
-  //     value: '',
-  //   },
-  //   {
-  //     field: '',
-  //     operator: '',
-  //     value: '',
-  //   },
-  //   {
-  //     field: '',
-  //     operator: '',
-  //     value: '',
-  //   },
-  //   {
-  //     field: '',
-  //     operator: '',
-  //     value: '',
-  //   },
-  //   {
-  //     field: '',
-  //     operator: '',
-  //     value: '',
-  //   },
-  //   {
-  //     field: '',
-  //     operator: '',
-  //     value: '',
-  //   },
-  //   {
-  //     field: '',
-  //     operator: '',
-  //     value: '',
-  //   },
-  //   {
-  //     field: '',
-  //     operator: '',
-  //     value: '',
-  //   },
-  // ]);
 
-  const conditionsGroups = [{}];
+  const conditionsGroups = [{}, {}, {}, {}];
 
   useEffect(() => {
     try {
@@ -94,9 +47,7 @@ const Rule = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'stretch',
-        // maxWidth: '90vw', // Opcional: para limitar el ancho máximo del modal
         maxHeight: '90vh', // Opcional: para limitar la altura máxima del modal
-        overflowY: 'auto', // Permite desplazamiento si el contenido es muy alto
       }}
     >
       <Box>
@@ -155,12 +106,18 @@ const Rule = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-start',
+            overflowY: 'auto',
+            maxHeight: '40vh',
             my: 2,
           }}
         >
           {conditionsGroups.map((_, index) => (
             <ConditionGroup key={'condGroup-' + index} />
           ))}
+
+          <Button sx={{ width: '100%' }} variant="outlined">
+            Agregar grupo
+          </Button>
 
           {/* {conditions.map((condition, index) => (
             <Condition
@@ -174,7 +131,7 @@ const Rule = () => {
         </Box>
 
         <Box sx={{ mt: 4, display: 'flex', justifyContent: 'space-between' }}>
-          <Button variant="outlined">Cancelar</Button>
+          <Button variant="text">Cancelar</Button>
           <Button variant="contained">Guardar</Button>
         </Box>
       </Box>

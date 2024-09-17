@@ -9,11 +9,17 @@ import {
 } from '@mui/material';
 import Link from '../../components/ui/Link';
 import { ProcessStepper } from '../../components/stepper/Stepper';
-import FilePicker from '../../components/ui/FilePicker';
+import { useState } from 'react';
+import { MuiFileInput } from 'mui-file-input';
 
 const Step1 = () => {
   const processors = ['FALABELLA', 'SANTANDER', 'TENPO'];
-  const selectedProcessor = 'FALABELLA';
+  const [selectedProcessor, setSelectedProcessor] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleChangeProcessor = (event: any) => {
+    setSelectedProcessor(event.target.value as string);
+  };
 
   return (
     <>
@@ -43,7 +49,13 @@ const Step1 = () => {
                 <input type="file" hidden />
               </Button> */}
 
-              <FilePicker />
+              <MuiFileInput
+                value={selectedFile}
+                onChange={(event: any) => {
+                  setSelectedFile(event);
+                }}
+                label="Archivo"
+              />
             </FormControl>
 
             <FormControl sx={{ mt: 5, width: '70%' }}>
@@ -52,10 +64,10 @@ const Step1 = () => {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={selectedProcessor}
+                onChange={handleChangeProcessor}
                 label="Procesador"
                 // onChange={() => {}}
               >
-                <MenuItem value="">-SELECCIONE-</MenuItem>
                 {processors.map((processor, index) => (
                   <MenuItem key={index} value={processor}>
                     {processor}

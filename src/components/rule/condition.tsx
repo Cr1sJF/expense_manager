@@ -61,7 +61,7 @@ const Condition = (props: CoditionProps) => {
         value={props.value}
       />
 
-      {!props.isFirst && (
+      {!props.isFirst  && (
         <IconButton>
           <Remove />
         </IconButton>
